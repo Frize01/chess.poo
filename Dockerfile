@@ -7,4 +7,4 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-COPY app/ /app/public/
+COPY . /app/public/

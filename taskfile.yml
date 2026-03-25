@@ -18,4 +18,4 @@ tasks:
   start:
     cmds:
       - echo "Running the project..."
-      - docker run -p 443:443 --rm -v $(pwd)/app:/app/public my-php-app
+      - docker run -p 443:443 --rm -v $(pwd):/app/public my-php-app
