@@ -9,7 +9,9 @@ RUN apt-get update && \
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 # Installe les extensions PHP nécessaires
-RUN install-php-extensions zip
+RUN install-php-extensions \
+    zip \
+    xdebug
 
 WORKDIR /app
 

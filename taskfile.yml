@@ -23,7 +23,7 @@ tasks:
     desc: Lance le projet et nomme le conteneur
     cmds:
       - echo "Running the project..."
-      - docker run --name chess-app -p 443:443 --rm -v "./:/app/public" -d my-php-app
+      - docker run --name chess-app --add-host host.docker.internal:host-gateway -p 443:443 -v "./:/app/public" -v "./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini" -d my-php-app
     silent: true
 
   console:
