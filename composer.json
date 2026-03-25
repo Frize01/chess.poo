@@ -1,0 +1,16 @@
+{
+    "name": "frize01/chess.poo",
+    "description": "TP POO Chess",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Frize01\\ChessPoo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Frize01"
+        }
+    ],
+    "require": {}
+}
