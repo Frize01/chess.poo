@@ -1,0 +1,21 @@
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    desc: Print a greeting message
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  build:
+    cmds:
+      - echo "Building the project..."
+      - docker build -t my-php-app .
+
+  start:
+    cmds:
+      - echo "Running the project..."
+      - docker run -p 443:443 --rm -v $(pwd)/app:/app/public my-php-app
