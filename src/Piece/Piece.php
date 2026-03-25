@@ -6,8 +6,8 @@
  */
 
 namespace ChessPoo\Piece;
-
-abstract class Piece
+use ChessPoo\Contract\Renderable;
+abstract class Piece implements Renderable
 {
 
 }

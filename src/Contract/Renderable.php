@@ -6,8 +6,7 @@
  */
 
 namespace ChessPoo\Contract;
-
-class Renderable
+Interface Renderable
 {
 
 }

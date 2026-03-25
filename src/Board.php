@@ -7,7 +7,8 @@
 
 namespace ChessPoo;
 
-class Board
+use ChessPoo\Contract\Renderable;
+class Board implements Renderable
 {
 
 }
