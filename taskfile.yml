@@ -1,21 +1,51 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
 version: '3'
 
 vars:
-  GREETING: Hello, World!
+  GREETING: Hello, world!
 
 tasks:
   default:
     desc: Print a greeting message
     cmds:
-      - echo "{{.GREETING}}"
+      - task --list
     silent: true
 
   build:
+    desc: Build du container
     cmds:
       - echo "Building the project..."
       - docker build -t my-php-app .
+    silent: true
 
   start:
+    desc: Lance le projet et nomme le conteneur
     cmds:
       - echo "Running the project..."
-      - docker run -p 443:443 --rm -v $(pwd):/app/public my-php-app
+      - docker run --name chess-app -p 443:443 --rm -v "./:/app/public" -d my-php-app
+    silent: true
+
+  console:
+    desc: Ouvre un terminal dans /app/public du conteneur
+    cmds:
+      - docker exec -it -w /app/public chess-app /bin/bash
+    silent: true
+
+  stop:
+    desc: Arrête et supprime le conteneur nommé
+    cmds:
+      - echo "Stopping the project..."
+      - docker stop chess-app
+      - docker rm chess-app
+    silent: true
+
+  phpstan:
+    desc: Analyse le code avec PHPStan (niveau 8) dans le conteneur, avec réinstallation des dépendances en cas d'erreur
+    cmds:
+      - |
+        docker exec -w /app/public chess-app vendor/bin/phpstan analyse src --level 8 || \
+        (echo "Erreur détectée. Réinstallation des dépendances Composer..." && \
+         docker exec -w /app/public chess-app composer install && \
+         docker exec -w /app/public chess-app vendor/bin/phpstan analyse src --level 8)
+    silent: true
